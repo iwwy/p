@@ -1,0 +1,67 @@
+body {
+  font-family: 'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif;
+  color: #3E4349;
+}
+
+header {
+  border-bottom: 3px solid #d0e0d0;
+  margin-bottom: 26px;
+  height: 92px;
+  padding-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 940px;
+}
+
+#logo {
+  position: absolute;
+}
+
+header h1 {
+  font-family: 'Garamond', 'Georgia', serif;
+  margin: 16px 0 20px 175px;
+  color: #3E4349;
+  font-style: italic;
+  font-size: 240%;
+}
+
+nav {
+  vertical-align: text-top;
+  display: inline-block;
+  width: 300px;
+}
+
+nav ul {
+  list-style: none;
+  line-height: 155%;
+}
+
+a {
+  text-decoration: none;
+  color: #004B6B;
+  border-bottom: 1px dotted #999;
+}
+a:hover {
+  color: #6D4100;
+  border-bottom: 1px solid #6D4100;
+}
+
+main {
+  margin: auto;
+  width: 940px;
+}
+
+section {
+  vertical-align: text-top;
+  display: inline-block;
+  width: 630px;
+}
+
+#user {
+  float: right;
+  margin-top: -3em;
+}
+
+.error {
+  color: red;
+}

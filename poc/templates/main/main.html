@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div id="logo"><img src="/static/images/logo.jpg" alt="" /></div>
+      <h1>Web Site Title</h1>
+      <div id="user">
+      <!--(if request.user)-->
+      <form action="@!request.route_url(name="main:views.logout")!@"
+        method="post">
+        <div><span>@!request.user.name!@</span>
+          <input type="submit" value="logout" /></div>
+      </form>
+      <!--(else)-->
+        <p><a
+          href="@!request.route_url(name="main:views.login")!@">Login</a></p>
+      <!--(end)-->
+      </div>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="/static/html/page.html">Static Page</a></li>
+          <li><a href="@!request.route_url(name="portal:portal/main.html")!@">Portal</a></li>
+          <li><a href="/static/html/page.html">Browse Code</a></li>
+        </ul>
+      </nav>
+      <section>
+        <!--(if request.user)-->
+        <p>Use this field to save text in your user account.</p>
+        <textarea id="usertext"></textarea>
+        <br /><button id="usertext_save">Save</button>
+        <script>
+          function set_usertext(e, reset) {
+            var url = "@!request.route_url(name="main:views.usertext")!@";
+            var textarea = document.getElementById("usertext");
+            var usertext = textarea.value;
+            if (reset) { usertext = ""; }
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function(response) {
+              var result = JSON.parse(response.target.responseText);
+              if (result.usertext) {
+                textarea.value = result.usertext;
+              }
+              else {
+                if (usertext) { alert("Error saving text!"); }
+              }
+            };
+            if (usertext) {
+              xmlhttp.open("post", url, true);
+              xmlhttp.send("usertext=" + encodeURIComponent(usertext));
+            }
+            else {
+              xmlhttp.open("get", url, true);
+              xmlhttp.send("");
+            }
+          }
+          document.getElementById("usertext_save").
+            addEventListener("click", set_usertext);
+          set_usertext(false, true);
+        </script>
+        <!--(else)-->
+        <p>Proof of concept WSGI framework. This code is not meant to be
+           used in production, rather the intention is to explore some
+           architectural and coding principles. It uses no dependencies
+           except for the templating system, which is a one file template
+           module taken from
+           <a href="https://www.simple-is-better.org/template/pyratemp.html">here</a>.
+           Other than that only standard python modules are used. To
+           test this code no istallation and no virtual environment is
+           required: it is enough to run <code>python wsgy.py</code> on
+           command line. The code is written for Python 3.6 or above.</p>
+        <p>Some of the features highlighted in this project.</p>
+        <ul>
+          <li>The framework is written to be WSGI complient and can be
+              served by any server supporting this protocol.</li>
+          <li>A website created using this approach can be grafted onto
+              another site with minimal change.</li>
+          <li>Client side password encryption for non HTTPS connection.</li>
+          <li>View access control.</li>
+        <ul>
+        <!--(end)-->
+      </section>
+    </main>
+  </body>
+</html>

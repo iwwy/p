@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+    <script src="/static/js/sha1min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="logo"><img src="/static/images/logo.png" alt="" /></div>
+      <h1>Login</h1>
+    </header>
+    <nav>
+    </nav>
+    <main>
+      <!--(if error)-->
+      <div><p class="error">@!error!@</p>
+      <!--(end)-->
+      <div>
+        <input type="hidden" value="@!salt!@" id="salt" />
+        <label>Username: <input type="text" id="username" autofocus="autofocus"/></label><br />
+        <label>Password: <input type="text" id="password" /></label><br />
+        <input type="submit" value="Login" id="login" />
+      </div>
+      <div style="display: none;" id="formplace"></div>
+    </main>
+    <script>
+      function login(e) {
+        var username = document.getElementById("username").value;
+        var salt = document.getElementById("salt").value;
+        var password = document.getElementById("password").value;
+        var passwordhash = hex_sha1(password);
+        var loginhash = hex_sha1(passwordhash + salt);
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/login";
+        form.enctype = "application/x-www-form-urlencoded";
+        var username_input = document.createElement("input");
+        username_input.name = "username";
+        username_input.value = username;
+        form.appendChild(username_input);
+        var hash_input = document.createElement("input");
+        hash_input.name = "hash";
+        hash_input.value = loginhash;
+        form.appendChild(hash_input);
+        document.getElementById("formplace").appendChild(form);
+        form.submit();
+      }
+      document.getElementById("formplace").innerHTML = "";
+      document.getElementById("login").addEventListener("click", login);
+      document.getElementById("password").addEventListener("keydown",
+        function(e) { if (e.keyCode === 13) { login(); } });
+    </script>
+  </body>
+</html>
