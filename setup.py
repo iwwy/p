@@ -28,5 +28,5 @@ setup(name="Project",
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      # entry_points={ "console_scripts": ["server = poc.wsgi:server"]}
+      entry_points={ "console_scripts": ["server = poc.wsgi:server"]}
   )

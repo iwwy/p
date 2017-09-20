@@ -6,7 +6,8 @@ from render import template, responsejson
 def login(request):
     error = request.session.pop("loginerror", "")
     if request.method == "POST":
-        error = request.login(request.post["username"], request.post["hash"])
+        error = request.login(request.post.get("username", ""),
+                              request.post.get("hash", ""))
         if error is None:
             path = request.session.pop("full_path", "/")
             return request.redirect(path)
