@@ -9,7 +9,7 @@ import urls
 import settings
 
 
-@template("404.html")
+@template("404.html", status=404)
 def _http404(request):
     return {"path": request.path}
 

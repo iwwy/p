@@ -7,14 +7,14 @@ from pyratemp import Template
 import settings
 
 
-def template(name):
+def template(name, *kw):
     def handler(func):
         @wraps(func)
         def wrapper(request, **kwargs):
             data = func(request, **kwargs)
             data["request"] = request
             content = Template(filename=settings.PYRATEMP_PATH + name)(**data)
-            return dict(content=content)
+            return dict(content=content, *kw)
         return wrapper
     return handler
 
