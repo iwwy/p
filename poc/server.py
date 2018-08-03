@@ -9,9 +9,9 @@ import urls
 import settings
 
 
-@template("404.html", status=404)
+@template("404.html")
 def _http404(request):
-    return {"path": request.path}
+    return {"path": request.path, "status": 404}
 
 
 class Application(object):
