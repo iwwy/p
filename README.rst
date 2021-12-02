@@ -11,7 +11,7 @@ used in production, rather the intention is to explore some
 architectural and coding principles. It uses no dependencies
 except for the templating system, which is a one file template
 module taken from
-`here <href="https://www.simple-is-better.org/template/pyratemp.html">`_.
+here: https://www.simple-is-better.org/template/pyratemp.html.
 
 Other than that only standard python modules are used. To
 test this code no istallation and no virtual environment is
