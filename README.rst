@@ -1,9 +1,11 @@
 Proof of Concept WSGI Demo
 ==========================
 
+UPDATE: Changes introduced in python 3.13 broke this code compatibility.
+
 Demo WSGI framework. The code has only standard python module dependencies and
-so it can be used without setup. It should work on linux on python 3.6 or
-higher. To test user login use the manage.py
+so it can be used without setup. It should work on linux on python 3.6 to
+3.12. To test user login use the manage.py
 file: `python manage.py user add <username password>`
 
 This code is not meant to be
